@@ -22,7 +22,7 @@ class SentMemesTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        // self.navigationItem.leftBarButtonItem = self.editButtonItem
 
     }
     
@@ -78,6 +78,7 @@ class SentMemesTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            setEditing(false, animated: true)
             // Delete the row from the data source
             self.memes.remove(at: indexPath.row)
             tableView.reloadData()

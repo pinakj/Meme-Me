@@ -14,27 +14,16 @@ class SentMemesCollectionViewController: UICollectionViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var flowLayout : UICollectionViewFlowLayout!
-
+    
+    var columnNum:CGFloat = 3.0
+    let inset: CGFloat = 5.0
+    let spacing: CGFloat = 5.0
+    let lineSpacing: CGFloat = 5.0
     var memes = [Meme]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        let space:CGFloat = 1.0
-        var dimension:CGFloat = 0.0
-        if UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft || UIDevice.current.orientation == UIDeviceOrientation.landscapeRight
-        {
-             dimension = (view.frame.size.height - (2 * space))/3.0
-            print("Here")
-        }
-        else
-        {
-             dimension = (view.frame.size.width - (2 * space))/3.0
-
-        }
-        flowLayout.minimumInteritemSpacing = 0.0
-        flowLayout.minimumLineSpacing = 0.0
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,4 +62,32 @@ class SentMemesCollectionViewController: UICollectionViewController {
         
     }
 
+}
+
+extension SentMemesCollectionViewController:UICollectionViewDelegateFlowLayout
+{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = Int((collectionView.frame.width / columnNum) - (inset + spacing))
+        
+        return CGSize(width: width, height: width)
+    }
+    
+    //top, bottom, left and right margin spacing
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
+    
+    //spacing between lines(items)
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return spacing
+    }
+    
+    //Spacing between each line(successive row)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return lineSpacing
+    }
+    
+    
 }

@@ -35,7 +35,6 @@ class InitialSetupViewController: UITabBarController {
     
     func initialiseMemes()
     {
-        print("Func called")
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "BaseViewController") as! ViewController
         present(vc, animated: true, completion: nil)
     }
